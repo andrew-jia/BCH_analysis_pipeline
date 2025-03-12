@@ -14,13 +14,25 @@ Cellbender as an alternative to SoupX -
 
 On McCleary - 
 
+```
 conda create -n cellbender python=3.9
 conda activate cellbender
 pip install --user cellbender
+```
+
 
 Example cellbender run to remove ambient RNA - 
-sbatch --wrap "cellbender remove-background --cuda --input CTRL38/CTRL38-starSolo.out/GeneFull/raw/ --output CTRL38/test.h5" --mem 32G -t 2:00:00 --gpus 1 --partition gpu
+
+```sbatch --wrap "cellbender remove-background --cuda --input CTRL38/CTRL38-starSolo.out/GeneFull/raw/ --output CTRL38/test.h5" --mem 32G -t 2:00:00 --gpus 1 --partition gpu```
+
 
 To load the cellbender .h5 files into Seurat - 
+```
 install.packages("scCustomize")
+
 library(scCustomize)
+
+seu <- Read_CellBender_h5_Mat("CTRL87_cellbender.h5")
+
+seu <- Seurat::CreateSeuratObject(counts = seu, project = "cellbender_CTRL87", min.cells = 3, min.features = 200)
+```
