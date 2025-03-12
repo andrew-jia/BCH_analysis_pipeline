@@ -53,6 +53,15 @@ seu.data = Seurat::Read10X(paste0(SOLO_DIR,'/soupx'), gene.column=1) #droplets
 
 seu = Seurat::CreateSeuratObject(counts = seu.data, project = "seu_ctrl87", min.cells = 3, min.features = 200)
 
+
+#If reading in cellbender files - 
+
+library(scCustomize)
+seu <- Read_CellBender_h5_Mat("CTRL87_cellbender.h5")
+
+seu <- Seurat::CreateSeuratObject(counts = seu, project = "cellbender_CTRL87", min.cells = 3, min.features = 200)
+
+
 ```
 
 
